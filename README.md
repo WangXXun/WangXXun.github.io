@@ -1,4 +1,4 @@
-<img src="C:\Users\91629\Documents\GitHub\WangXXun.github.io\pics\logo.png" style="zoom:5%;" /> I'm Wang Xun, an Chinese architect. I enjoy using new technology to solve architectural problems. Welcome to my personal website!
+<img src="pics\logo.png" style="zoom:5%;" /> I'm Wang Xun, a Chinese architect. I enjoy using new technology to solve architectural problems. Welcome to my personal website!
 
 ## Skills
 
