@@ -1,16 +1,24 @@
-<!doctype html>
+---
+layout: compress
+---
+<!DOCTYPE html>
 <html lang="en">
-{% include head.html %}
-<body>
-  <main>
-    <div class="grid grid-centered">
-      <div class="grid-cell">
-        {% include navigation.html %}
-        {{ content }}
-        {% include footer.html %}
-      </div>
-    </div>
+<head>
+
+  {% include head.html %}
+
+</head>
+<body id="{% if page.title %}{{ page.title | slugify }}{% else %}home{% endif %}" class="{{ page.layout | downcase }}-layout">
+  
+  {% include header.html %}
+
+  <main class="💈">
+
+    {{ content }}
+    
   </main>
-  {% include javascripts.html %}
+
+  {% include footer.html %}
+
 </body>
 </html>

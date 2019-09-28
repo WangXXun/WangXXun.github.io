@@ -1,66 +1,45 @@
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>{{ site.name }} | {{ page.title }}</title>
-  <meta name="description" content="{{ page.description }}">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta property="og:title" content="{{ page.title | escape }}">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ page.url | absolute_url }}">
-  <meta property="og:description" content="{{ page.description }}">
-  <meta property="og:site_name" content="{{ site.name }}">
+<title>{% if page.title %}{{ page.title | escape }} | {{ site.title }}{% else %}{{ site.title | escape }}{% endif %}</title>
+<meta name="description" content="{{ site.description }}">
 
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:url" content="{{ page.url | absolute_url }}">
-  <meta name="twitter:title" content="{{ page.title | escape }}">
-  <meta name="twitter:description" content="{{ page.description }}">
+<meta itemprop="name" content="{{ site.name }}">
+<meta itemprop="description" content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description }}{% endif %}">
+<meta itemprop="image" content="{% if page.image %}{{ page.image | absolute_url }}{% else %}{{ site.default_img | absolute_url }}{% endif %}">
 
-  {% if page.thumb_image %}
-    {% if page.thumb_image contains '://' %}
-      <meta property="og:image" content="{{ page.thumb_image }}">
-      <meta name="twitter:image" content="{{ page.thumb_image }}">
-    {% else %}
-      <meta property="og:image" content="{{ site.url }}{% asset '{{ page.thumb_image }}' @path %}">
-      <meta name="twitter:image" content="{{ site.url }}{% asset '{{ page.thumb_image }}' @path %}">
-    {% endif %}
-  {% else %}
-    <meta property="og:image" content="{{ site.url }}{% asset og-image.jpg @path %}">
-    <meta name="twitter:image" content="{{ site.url }}{% asset og-image.jpg @path %}">
-  {% endif %}
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{% if page.title %}{{ page.title | escape }} | {{ site.title }}{% else %}{{ site.title | escape }}{% endif %}">
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:description" content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description }}{% endif %}">
+<meta property="og:image" content="{% if page.image %}{{ page.image | absolute_url }}{% else %}{{ site.default_img | absolute_url }}{% endif %}">
 
-  <link href="{{ 'feed.xml' | absolute_url }}" type="application/rss+xml" rel="alternate" title="{{ site.name }} Last 10 blog posts" />
+<meta name="twitter:url" content="{{ page.url | absolute_url }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{% if page.title %}{{ page.title | escape }} | {{ site.title }}{% else %}{{ site.title | escape }}{% endif %}">
+<meta name="twitter:site" content="{{ site.title }}">
+<meta name="twitter:description" content="{% if page.description %}{{ page.description | escape }}{% else %}{{ site.description }}{% endif %}">
+{% if site.twitter_username %}
+  <meta name="twitter:creator" content="@{{ site.twitter_username }}">
+{% endif %}
+<meta property="twitter:image" content="{% if page.image %}{{ page.image | absolute_url }}{% else %}{{ site.default_img | absolute_url }}{% endif %}">
 
-  {% if site.local_fonts %}
-    {% asset fonts.css %}
-  {% endif %}
+<link rel="icon" type="image/x-icon" href="{{ '/assets/images/favicon.ico' | prepend: site.baseurl }}">
 
-  {% if site.theme_toggle == true %}
+<link rel="stylesheet" href="{{ '/assets/css/app.min.css' | prepend: site.baseurl }}">
 
-    {% if site.blog_theme == "light" %}
-      <link rel="icon" type="image/x-icon" href="{% asset favicon-light.ico @path %}">
-      <link rel="apple-touch-icon" href="{% asset apple-touch-icon-light.png @path %}">
-      <link rel="stylesheet" type="text/css" title="light" id="light" href="{% asset light.css @path%}">
-      <link rel="stylesheet" type="text/css" title="dark" id="dark" href="{% asset dark.css @path%}" disabled="true">
-    {% else %}
-      <link rel="icon" type="image/x-icon" href="{% asset favicon-dark.ico @path %}">
-      <link rel="apple-touch-icon" href="{% asset apple-touch-icon-dark.png @path %}">
-      <link rel="stylesheet" type="text/css" title="light" id="light" href="{% asset light.css @path%}">
-      <link rel="stylesheet" type="text/css" title="dark" id="dark" href="{% asset dark.css @path%}" disabled="false">
-    {% endif %}
+<link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.baseurl }}">
+<link rel="canonical" href="{{ page.url | replace: 'index.html', '' | prepend: site.baseurl }}">
 
-  {% else %}
-
-    {% if site.blog_theme == "light" %}
-      <link rel="icon" type="image/x-icon" href="{% asset favicon-light.ico @path %}">
-      <link rel="apple-touch-icon" href="{% asset apple-touch-icon-light.png @path %}">
-      {% asset light.css %}
-    {% else %}
-      <link rel="icon" type="image/x-icon" href="{% asset favicon-dark.ico @path %}">
-      <link rel="apple-touch-icon" href="{% asset apple-touch-icon-dark.png @path %}">
-      {% asset dark.css %}
-    {% endif %}
-
-  {% endif %}
-
-</head>
+{% if site.google_analytics %}
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', '{{ site.google_analytics }}', 'auto');
+    ga('send', 'pageview');
+  </script>
+{% endif %}
