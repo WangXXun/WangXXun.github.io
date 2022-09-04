@@ -18,7 +18,7 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 locale                   : "en-US"
 title                    : "Xun's website"
 title_separator          : "-"
-subtitle                 : # site tagline that appears below site title in masthead
+subtitle                 : "Always believe that something wonderful is about to happen."
 name                     : "Wang Xun"
 description              : "An amazing website with my works."
 url                      : # the base hostname & protocol for your site e.g. "https://wangxxun.github.io"
@@ -106,8 +106,8 @@ analytics:
 author:
   name             : "Wang Xun"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Always believe that something wonderful is about to happen."
-  location         : "China"
+  bio              : "once an architect"
+  location         : "Changsha, China"
   # email            : "wangxun_arch@163.com"
   links:
     - label: "Email"
@@ -116,9 +116,6 @@ author:
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://wangxxun.github.io"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/https://twitter.com/WangXXun"
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       # url: "https://facebook.com/"
@@ -128,13 +125,13 @@ author:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       url: "https://instagram.com/wangxunzzz/"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/https://twitter.com/WangXXun"
 
 # Site Footer
 footer:
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/https://twitter.com/WangXXun"
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       # url:
@@ -150,6 +147,9 @@ footer:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       url: "https://instagram.com/wangxunzzz/"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/https://twitter.com/WangXXun"
 
 
 # Reading Files
