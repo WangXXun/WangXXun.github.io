@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.main {
+  position: relative;
+  width: 100%;
+  min-height: 300vh; /* 增加高度确保可以滚动 */
+  overflow-x: hidden;
+  background: #000000;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(68, 136, 255, 0.04) 0%, transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(136, 204, 255, 0.03) 0%, transparent 60%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.01) 0%, transparent 100%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* 地球场景容器 */
+.sceneContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+/* 地图容器 - 黑白底图样式 */
+.mapContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: auto;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+/* 黑白地图样式 */
+.mapContainer :global(.leaflet-container) {
+  background: #000000;
+}
+
+.mapContainer :global(.leaflet-tile-container img) {
+  filter: grayscale(100%) brightness(0.75) contrast(1.3);
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+
+.mapContainer :global(.leaflet-tile-container img:hover) {
+  opacity: 0.95;
+}
+
+/* 地图控件样式 */
+.mapContainer :global(.leaflet-control-zoom) {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.mapContainer :global(.leaflet-control-zoom a) {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.2s ease;
+}
+
+.mapContainer :global(.leaflet-control-zoom a:hover) {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.mapContainer :global(.leaflet-control-attribution) {
+  background: rgba(0, 0, 0, 0.7);
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 9px;
+  padding: 3px 6px;
+  border-radius: 2px;
+  backdrop-filter: blur(8px);
+}
+
+.mapContainer :global(.leaflet-control-attribution a) {
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.2s ease;
+}
+
+.mapContainer :global(.leaflet-control-attribution a:hover) {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 主内容区域 */
+.content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* 标题样式 */
+.title {
+  font-weight: 200;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0;
+  color: #ffffff;
+  position: relative;
+  text-shadow: 
+    0 0 40px rgba(255, 255, 255, 0.15),
+    0 0 80px rgba(255, 255, 255, 0.05);
+  will-change: transform, opacity, letter-spacing, font-size;
+  backface-visibility: hidden;
+  
+  /* 初始状态：大字体居中 */
+  font-size: clamp(3rem, 8vw, 8rem);
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  letter-spacing: 0.25em;
+  filter: blur(0);
+  
+  /* 动态属性 - 使用 CSS 变量 */
+  font-size: calc(
+    clamp(1.2rem, 3vw, 2rem) + 
+    (clamp(3rem, 8vw, 8rem) - clamp(1.2rem, 3vw, 2rem)) * 
+    (1 - var(--scroll-progress, 0))
+  );
+  
+  opacity: calc(1 - var(--scroll-progress, 0) * 0.15);
+  transform: 
+    translateY(calc(var(--scroll-progress, 0) * -48vh))
+    scale(calc(1 - var(--scroll-progress, 0) * 0.75));
+  letter-spacing: calc(0.25em - var(--scroll-progress, 0) * 0.16em);
+  filter: blur(calc(var(--scroll-progress, 0) * 0.5px));
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -0.6em;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(90% * (1 - var(--scroll-progress, 0)));
+  height: 1px;
+  background: linear-gradient(
+    to right, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.3) 20%, 
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0.3) 80%, 
+    transparent 100%
+  );
+  opacity: calc(1 - var(--scroll-progress, 0));
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* 滚动占位内容 */
+.scrollContent {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.scrollSpacer {
+  height: 100vh;
+  width: 100%;
+}
+
+.futureContent {
+  height: 100vh;
+  width: 100%;
+  /* 预留空间用于未来页面内容 */
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .title {
+    transform: 
+      translateY(calc(var(--scroll-progress, 0) * -40vh))
+      scale(calc(1 - var(--scroll-progress, 0) * 0.65));
+    letter-spacing: calc(0.2em - var(--scroll-progress, 0) * 0.12em);
+  }
+  
+  .title::after {
+    width: calc(85% * (1 - var(--scroll-progress, 0)));
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: calc(
+      clamp(1rem, 4vw, 1.5rem) + 
+      (clamp(2.5rem, 10vw, 5rem) - clamp(1rem, 4vw, 1.5rem)) * 
+      (1 - var(--scroll-progress, 0))
+    );
+  }
+}
+
+/* 性能优化 */
+@media (prefers-reduced-motion: reduce) {
+  .title,
+  .sceneContainer,
+  .mapContainer {
+    transition: none;
+    animation: none;
+  }
+}

@@ -1,35 +1,36 @@
 {
-  "name": "minimal-mistakes",
+  "name": "wangxxun-portfolio",
+  "version": "1.0.0",
+  "description": "Wang Xun's personal website with Three.js",
   "private": true,
-  "version": "4.24.0",
-  "description": "Minimal Mistakes 2 column Jekyll theme.",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/mmistakes/minimal-mistakes.git"
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-  "keywords": [
-    "jekyll",
-    "theme",
-    "minimal"
-  ],
-  "author": "Michael Rose",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mmistakes/minimal-mistakes/issues"
-  },
-  "homepage": "https://mmistakes.github.io/minimal-mistakes/",
-  "engines": {
-    "node": ">= 0.10.0"
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.160.0",
+    "@react-three/fiber": "^8.15.0",
+    "@react-three/drei": "^9.92.0",
+    "three-mesh-bvh": "^0.8.0",
+    "leaflet": "^1.9.4",
+    "react-leaflet": "^4.2.1"
   },
   "devDependencies": {
-    "npm-run-all": "^4.1.5",
-    "onchange": "^7.1.0",
-    "uglify-js": "^3.13.6"
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/three": "^0.160.0",
+    "@types/leaflet": "^1.9.8",
+    "typescript": "^5.3.0",
+    "eslint": "^8.54.0",
+    "eslint-config-next": "^14.0.0"
   },
-  "scripts": {
-    "uglify": "uglifyjs assets/js/vendor/jquery/jquery-3.6.0.js assets/js/plugins/jquery.fitvids.js assets/js/plugins/jquery.greedy-navigation.js assets/js/plugins/jquery.magnific-popup.js assets/js/plugins/jquery.ba-throttle-debounce.js assets/js/plugins/smooth-scroll.js assets/js/plugins/gumshoe.js assets/js/_main.js -c -m -o assets/js/main.min.js",
-    "add-banner": "node banner.js",
-    "watch:js": "onchange \"assets/js/**/*.js\" -e \"assets/js/main.min.js\" -- npm run build:js",
-    "build:js": "npm run uglify && npm run add-banner"
+  "overrides": {
+    "three-mesh-bvh": "^0.8.0"
   }
 }
