@@ -34,16 +34,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# 旧的 Jekyll 文件（可选，如果不再需要可以删除）
-# _config.yml
-# _data/
-# _includes/
-# _layouts/
-# _sass/
-# _posts/
-# assets/
-# Gemfile
-# Rakefile
-# staticman.yml
-# banner.js
-# index.html
+# 旧的 Jekyll 文件（不再需要）
+Gemfile
+Rakefile
+staticman.yml
+banner.js
+_config.yml

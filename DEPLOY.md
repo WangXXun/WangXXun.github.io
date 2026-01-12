@@ -1,8 +1,17 @@
 # GitHub Pages 部署指南
 
-## 部署步骤
+## 重要：禁用 Jekyll
 
-由于你的仓库名是 `WangXXun.github.io`，GitHub Pages 会自动使用 `master` 分支的根目录内容作为网站。
+GitHub Pages 默认会尝试使用 Jekyll 构建。对于 Next.js 项目，需要：
+
+1. **创建 `.nojekyll` 文件**（已创建）
+2. **删除或忽略 Jekyll 相关文件**：
+   - `Gemfile`
+   - `_config.yml`
+   - `Rakefile`
+   - 其他 Jekyll 文件
+
+## 部署步骤
 
 ### 方法一：手动部署（推荐）
 
@@ -11,72 +20,70 @@
    npm run build
    ```
 
-2. **将构建文件复制到根目录**
+2. **确保 .nojekyll 文件存在**
    ```bash
-   # 备份旧文件（如果需要）
-   # 然后复制 out 目录的内容到根目录
+   touch .nojekyll
+   ```
+
+3. **删除 Jekyll 相关文件**（如果存在）
+   ```bash
+   rm -f Gemfile _config.yml Rakefile
+   ```
+
+4. **将构建文件复制到根目录**
+   ```bash
    cp -r out/* .
    ```
 
-3. **提交并推送**
+5. **提交并推送**
    ```bash
    git add .
    git commit -m "Deploy Next.js site to GitHub Pages"
    git push origin master
    ```
 
-4. **等待部署**
-   - 访问 https://wangxxun.github.io
-   - 通常需要几分钟时间生效
+6. **在 GitHub 设置中**
+   - 进入仓库 Settings > Pages
+   - Source 选择 `master` 分支，文件夹选择 `/ (root)`
+   - **重要**：确保 "Build with Jekyll" 选项是关闭的（如果看到的话）
 
-### 方法二：使用 GitHub Actions 自动部署（推荐用于未来更新）
+7. **等待部署**
+   - 访问：https://wangxxun.github.io
+   - 通常需要 1-2 分钟生效
 
-创建一个 `.github/workflows/deploy.yml` 文件：
+### 方法二：使用部署脚本
 
-```yaml
-name: Deploy to GitHub Pages
-
-on:
-  push:
-    branches:
-      - master
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: 'npm'
-      
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Build
-        run: npm run build
-      
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+```bash
+./deploy-to-gh-pages.sh
 ```
 
-### 注意事项
+## 故障排除
 
-1. **basePath 配置**：由于仓库名是 `WangXXun.github.io`，不需要设置 `basePath`
-2. **静态资源**：确保所有资源路径都是相对路径
-3. **404 页面**：Next.js 的 404 页面会自动处理
-4. **更新内容**：每次更新后需要重新构建并推送
+### 错误：There was an error parsing `Gemfile`
 
-### 故障排除
+**原因**：GitHub Pages 检测到 `Gemfile`，尝试使用 Jekyll 构建
 
-如果网站无法访问：
-1. 检查 GitHub Pages 设置：Settings > Pages
-2. 确保源分支是 `master`
-3. 检查构建是否有错误
-4. 查看 GitHub Actions 日志（如果使用）
+**解决方案**：
+1. 删除 `Gemfile` 文件
+2. 确保 `.nojekyll` 文件存在并已提交
+3. 重新提交并推送
+
+```bash
+rm -f Gemfile
+touch .nojekyll
+git add .nojekyll
+git rm Gemfile
+git commit -m "Remove Jekyll files, add .nojekyll"
+git push origin master
+```
+
+### 网站显示 404
+
+1. 检查 GitHub Pages 设置是否正确
+2. 确保 `.nojekyll` 文件在根目录
+3. 检查构建文件是否正确复制到根目录
+4. 等待几分钟让 GitHub 完成部署
+
+### 资源加载失败
+
+确保 `next.config.js` 中 `basePath` 和 `assetPrefix` 都设置为空字符串（对于 `username.github.io` 仓库）
