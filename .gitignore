@@ -33,10 +33,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# 旧的 Jekyll 文件（不再需要）
-Gemfile
-Rakefile
-staticman.yml
-banner.js
-_config.yml
