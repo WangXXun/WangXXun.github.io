@@ -1,0 +1,100 @@
+{
+  "siteName": "xun's studio",
+  "meta": {
+    "title": "xun's studio — Architecture → Spatial Intelligence",
+    "description": "I used to design and build space. Now I teach machines to understand it."
+  },
+  "nav": {
+    "works": "Works",
+    "about": "About",
+    "skip": "Skip",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "prologue": {
+    "title": "xun's studio",
+    "scroll": "Scroll"
+  },
+  "acts": {
+    "design": {
+      "title": "Design"
+    },
+    "build": {
+      "title": "Build"
+    },
+    "city": {
+      "title": "City"
+    },
+    "evaluate": {
+      "title": "Evaluate"
+    },
+    "reconstruct": {
+      "title": "Reconstruct"
+    },
+    "embody": {
+      "title": "Embody"
+    },
+    "index": {
+      "title": "Index"
+    }
+  },
+  "placeholder": "Scene in progress",
+  "illustrative": "Illustrative",
+  "index": {
+    "selected": "Selected Works",
+    "all": "All works →",
+    "contact": "Contact",
+    "copied": "Copied"
+  },
+  "works": {
+    "title": "Works",
+    "all": "All",
+    "empty": "Nothing here yet.",
+    "back": "← All works",
+    "prev": "Prev",
+    "next": "Next",
+    "fallbackNotice": "English version coming soon.",
+    "categories": {
+      "design": "Design",
+      "build": "Build",
+      "city": "City",
+      "evaluate": "Evaluate",
+      "reconstruct": "Reconstruct",
+      "embody": "Embody"
+    }
+  },
+  "about": {
+    "title": "About",
+    "lead": "I used to design and build space. Now I teach machines to understand it.",
+    "timeline": [
+      {
+        "tag": "01 DESIGN",
+        "text": "Architecture, drawings, physical models — card, foam, timber, 3D print"
+      },
+      {
+        "tag": "02 BUILD",
+        "text": "1:1 robotic fabrication of a parametric timber ceiling"
+      },
+      {
+        "tag": "03 CITY",
+        "text": "Urban data"
+      },
+      {
+        "tag": "04 EVALUATE",
+        "text": "DeepArch — built-environment evaluation"
+      },
+      {
+        "tag": "05 RECONSTRUCT",
+        "text": "3DGS reconstruction, PCG data pipelines"
+      },
+      {
+        "tag": "06 EMBODY",
+        "text": "VLA, spatial intelligence"
+      }
+    ],
+    "contact": "Contact"
+  },
+  "footer": {
+    "copyright": "© xun's studio"
+  }
+}
