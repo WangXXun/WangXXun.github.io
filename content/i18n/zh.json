@@ -1,0 +1,100 @@
+{
+  "siteName": "xun's studio",
+  "meta": {
+    "title": "xun's studio — 建筑 → 空间智能",
+    "description": "我曾设计和建造空间，现在让机器理解空间。"
+  },
+  "nav": {
+    "works": "作品",
+    "about": "关于",
+    "skip": "跳过",
+    "menu": "菜单",
+    "close": "关闭"
+  },
+  "prologue": {
+    "title": "xun's studio",
+    "scroll": "向下滚动"
+  },
+  "acts": {
+    "design": {
+      "title": "设计"
+    },
+    "build": {
+      "title": "建造"
+    },
+    "city": {
+      "title": "城市"
+    },
+    "evaluate": {
+      "title": "评估"
+    },
+    "reconstruct": {
+      "title": "空间重建"
+    },
+    "embody": {
+      "title": "具身智能"
+    },
+    "index": {
+      "title": "索引"
+    }
+  },
+  "placeholder": "场景制作中",
+  "illustrative": "示意数据",
+  "index": {
+    "selected": "精选作品",
+    "all": "全部作品 →",
+    "contact": "联系",
+    "copied": "已复制"
+  },
+  "works": {
+    "title": "作品",
+    "all": "全部",
+    "empty": "暂无内容。",
+    "back": "← 全部作品",
+    "prev": "上一个",
+    "next": "下一个",
+    "fallbackNotice": "本页暂无中文。",
+    "categories": {
+      "design": "设计",
+      "build": "建造",
+      "city": "城市",
+      "evaluate": "评估",
+      "reconstruct": "空间重建",
+      "embody": "具身智能"
+    }
+  },
+  "about": {
+    "title": "关于",
+    "lead": "我曾设计和建造空间，现在让机器理解空间。",
+    "timeline": [
+      {
+        "tag": "01 DESIGN",
+        "text": "建筑设计、画图、实体模型（卡纸、花泥、木、3D 打印）"
+      },
+      {
+        "tag": "02 BUILD",
+        "text": "1:1 机器人建造参数化木吊顶"
+      },
+      {
+        "tag": "03 CITY",
+        "text": "城市大数据"
+      },
+      {
+        "tag": "04 EVALUATE",
+        "text": "DeepArch：建成环境评估"
+      },
+      {
+        "tag": "05 RECONSTRUCT",
+        "text": "3DGS 三维重建、PCG 数据管线"
+      },
+      {
+        "tag": "06 EMBODY",
+        "text": "VLA、空间智能"
+      }
+    ],
+    "contact": "联系"
+  },
+  "footer": {
+    "copyright": "© xun's studio"
+  }
+}

@@ -1,92 +1,65 @@
-# wangxun's website
+# xun's studio
 
-个人网站，从零开始设计。
+Personal site of Xun Wang — a scroll story told through one white model:
+Design → Build → City → Evaluate → Reconstruct → Embody, then an index of works.
 
-## 技术栈
+Next.js (App Router, static export) · React Three Fiber · Drei · GSAP ScrollTrigger · Lenis.
 
-- Next.js 14
-- React 18
-- TypeScript
+Handoff plan for the asset-based rebuild (Chinese): [`docs/HANDOFF.md`](docs/HANDOFF.md).
 
-## 开发
+## Develop
 
 ```bash
 npm install
-npm run dev
+npm run dev          # http://localhost:3000 → /en
+npm run build        # static export to ./out
+npm start            # serve ./out on :3000
+npm run lint && npm run typecheck
 ```
 
-打开 [http://localhost:3000](http://localhost:3000) 查看。
+Useful query flags on the home page: `?q=high|mid|low` (render tier), `?motion=reduce`
+(reduced-motion path), `?capture` (frozen clock for scripted capture).
 
-## 构建
+## Structure
 
-```bash
-npm run build
+```
+app/[lang]/                 /en and /zh (static params); home, works, works/[slug], about
+app/(root)/page.tsx         "/" → saved language or /en
+content/i18n/{en,zh}.json   every UI string, keyed identically
+content/works/<slug>/index.{en,zh}.mdx   one folder per project (missing language falls back)
+lib/scroll/                 ScrollBus + driver (Lenis → ScrollTrigger → bus, once per frame)
+lib/director/               story cursor → scene state (camera keys, stages, scale jump, HUD)
+components/three/           Canvas, lights, materials, room, site (canopy, robot, city), index stage
+components/home/            DOM titles, HUD, index section
+scripts/capture.mjs         deterministic headless capture (screenshots / video frames)
 ```
 
-构建完成后，静态文件将输出到 `out` 目录。
+### One scroll source, one frame
 
-## 部署到 GitHub Pages
+Lenis runs without its own rAF. While the Canvas is mounted, R3F's `addEffect` calls
+`tick()` → `lenis.raf()` → `ScrollTrigger.update` → `bus` snapshot → `derive()` (scene
+state) → DOM listeners (titles, HUD). R3F then renders the WebGL frame from the same
+snapshot, so DOM and WebGL never drift by a frame. Act ranges come from ScrollTrigger
+measurements of the spacer sections, so resize/refresh is handled by GSAP.
 
-### 方法一：使用部署脚本（推荐）
+### Adding a work
 
-**Windows (PowerShell):**
-```powershell
-.\deploy.ps1
+Create `content/works/<slug>/index.en.mdx` (and optionally `index.zh.mdx`):
+
+```yaml
+---
+title: DeepArch
+year: Ongoing
+category: evaluate   # design | build | city | evaluate | reconstruct | embody
+role: Lead & creator
+featured: true       # appears in the home index
+order: 2
+---
 ```
 
-**Linux/Mac:**
-```bash
-chmod +x deploy.sh
-./deploy.sh
-```
+## Deploy
 
-然后提交并推送：
-```bash
-git add .
-git commit -m "Deploy to GitHub Pages"
-git push origin master
-```
+`.github/workflows/deploy.yml` builds and publishes `out/` to GitHub Pages on every push
+to `master`. In the repository settings, set **Pages → Source** to **GitHub Actions**.
 
-### 方法二：手动部署
-
-1. **构建项目**
-   ```bash
-   npm run build
-   ```
-
-2. **复制构建文件到根目录**
-   ```bash
-   # Windows (PowerShell)
-   Copy-Item -Path "out\*" -Destination "." -Recurse -Force
-   
-   # Linux/Mac
-   cp -r out/* .
-   ```
-
-3. **创建 .nojekyll 文件**（防止 GitHub Pages 使用 Jekyll）
-   ```bash
-   # Windows
-   New-Item -ItemType File -Path ".nojekyll"
-   
-   # Linux/Mac
-   touch .nojekyll
-   ```
-
-4. **提交并推送**
-   ```bash
-   git add .
-   git commit -m "Deploy to GitHub Pages"
-   git push origin master
-   ```
-
-5. **在 GitHub 设置中启用 Pages**
-   - 进入仓库 Settings > Pages
-   - Source 选择 `master` 分支
-   - 保存
-
-6. **访问网站**
-   - 等待几分钟后访问：https://wangxxun.github.io
-
-## 许可证
-
-MIT
+All data and analysis visuals on the site are illustrative.
