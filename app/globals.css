@@ -436,6 +436,8 @@ html[lang^="zh"] .xs-act-mask {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+}
+.xs-index-inner > * {
   pointer-events: auto;
 }
 .xs-index-inner {
@@ -835,6 +837,10 @@ html[lang^="zh"] .xs-lead {
     flex-direction: column;
     align-items: flex-start;
     gap: 6px;
+  }
+  .xs-hud-br {
+    bottom: calc(var(--pad) + 44px);
+    max-width: 60vw;
   }
   .xs-worklist a {
     grid-template-columns: 3ch 1fr;

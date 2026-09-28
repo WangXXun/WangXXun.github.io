@@ -40,7 +40,13 @@ export function CameraRig() {
     camera.lookAt(smoothTgt.current);
 
     const near = S.view > 1.8 && S.view < 2.25 ? Math.max(0.002, 0.05 * S.siteS) : S.view >= 2.9 ? 0.2 : 0.02;
-    const fov = camera.fov + (S.fov - camera.fov) * k;
+    // Portrait screens: widen vertical FOV so the horizontal framing matches a 16:10 layout.
+    const aspect = camera.aspect || 1.6;
+    const targetFov =
+      aspect < 1.4
+        ? THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(S.fov) / 2) * Math.min(1.4 / aspect, 2.2)))
+        : S.fov;
+    const fov = camera.fov + (targetFov - camera.fov) * k;
     if (Math.abs(fov - camera.fov) > 1e-4 || camera.near !== near) {
       camera.fov = fov;
       camera.near = near;
