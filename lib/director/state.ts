@@ -92,8 +92,8 @@ export const KEYS: Key[] = [
   { c: 6.6, space: "site", pos: [18, 12, -40], tgt: [0, 4, 0], fov: 44 },
   { c: 6.95, space: "site", pos: [8, 30, -20], tgt: [0, 0, 0], fov: 40 },
   // Index — cut to the index stage.
-  { c: 7.0, space: "index", pos: [5.5, 4.2, 7.5], tgt: [1.6, 0.4, 0], fov: 26, cut: true },
-  { c: 8.0, space: "index", pos: [4.2, 3.0, 6.8], tgt: [1.6, 0.35, 0], fov: 26 },
+  { c: 7.0, space: "index", pos: [3.2, 2.1, 7.4], tgt: [2.4, 0.05, 0], fov: 26, cut: true },
+  { c: 8.0, space: "index", pos: [3.0, 4.4, 6.6], tgt: [2.4, 1.7, 0], fov: 26 },
 ];
 
 /** Reduced motion: static keyframes per sub-section. */
