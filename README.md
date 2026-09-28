@@ -5,6 +5,8 @@ Design → Build → City → Evaluate → Reconstruct → Embody, then an index
 
 Next.js (App Router, static export) · React Three Fiber · Drei · GSAP ScrollTrigger · Lenis.
 
+Handoff plan for the asset-based rebuild (Chinese): [`docs/HANDOFF.md`](docs/HANDOFF.md).
+
 ## Develop
 
 ```bash
